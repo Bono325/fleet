@@ -1,0 +1,21 @@
+{
+  "name": "fleets",
+  "version": "1.0.0",
+  "description": "A fleet management system",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "node test/initAPI.test.js"
+  },
+  "author": "Bono325",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
