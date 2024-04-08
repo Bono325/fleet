@@ -1,10 +1,10 @@
 import express from 'express';
-import { addDriver, authDriver } from '../controllers/driverController.js';
+import { addDriver, authDriver, getDrivers } from '../controllers/driverController.js';
 import { protect, admin } from '../middleware/authMiddlerware.js';
 
 const router = express.Router();
 
-router.route('/').post(protect, addDriver);
+router.route('/').get(protect, admin, getDrivers).post(protect, admin, addDriver);
 
 router.post('/auth', authDriver);
 

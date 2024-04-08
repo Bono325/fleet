@@ -44,7 +44,6 @@ const logoutDriver = asyncHandler (async (req, res) => {
 const getDriverProfile = asyncHandler (async (req, res) => {
     const driver = await Driver.findById(req.user._id);
 
-
     if (driver) {
         res.status(200).json({
             _id: driver._id,
@@ -54,6 +53,28 @@ const getDriverProfile = asyncHandler (async (req, res) => {
             licenseCode: driver.licenseCode,
             licenseExpiry: driver.licenseExpiry
         });
+    } else {
+        res.status(404);
+        throw new Error('Driver not found');
+    }
+});
+
+// @desc    Get Drivers
+// @route   GET /api/v1/drivers/
+// @access  Private / Admin
+const getDrivers = asyncHandler (async (req, res) => {
+    const drivers = await Driver.find({});
+    res.status(200).json(drivers);
+});
+
+// @desc    Get Driver by ID
+// @route   GET /api/v1/drivers/:id
+// @access  Private / Admin
+const getDriverByID = asyncHandler (async (req, res) => {
+    const driver = await Driver.findById(req.params.id).select('-password');
+
+    if (driver)  {
+        res.status(200).json(driver);
     } else {
         res.status(404);
         throw new Error('Driver not found');
@@ -104,7 +125,7 @@ const addDriver = asyncHandler (async (req, res) => {
      password: '12345',
      licenseNumber: '555555555',
      licenseCode: 'zz',
-     licenseExpiry: 2005/3/22
+     licenseExpiry: 2005-3-22
     })
  
     const createdDriver = await driver.save();
@@ -152,4 +173,4 @@ const addDriver = asyncHandler (async (req, res) => {
    }
  });
  
-export { authDriver, logoutDriver, getDriverProfile, updateDriverProfile, deleteDriver, updateDriver, addDriver}
+export { authDriver, logoutDriver, getDriverByID, getDriverProfile, updateDriverProfile, deleteDriver, updateDriver, addDriver, getDrivers}
