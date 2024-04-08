@@ -5,8 +5,9 @@ dotenv.config();
 import connectDB from './config/db.js';
 import cookieParser from 'cookie-parser';
 
-import userRoutes from "./routes/userRoutes.js"
-import driverRoutes from "./routes/driverRoutes.js"
+import userRoutes from "./routes/userRoutes.js";
+import driverRoutes from "./routes/driverRoutes.js";
+import vehicleRoutes from "./routes/vehicleRoutes.js";
 
 connectDB();
 
@@ -19,8 +20,9 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 
-app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/drivers", driverRoutes);
+app.use("/api/v1/vehicles", vehicleRoutes);
 
 app.get("/", (req, res) => {
     res.send("API is runnning!!")

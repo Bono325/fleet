@@ -1,9 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const tripSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Üser",
+  },
   truck_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Truck',
+    ref: 'Vehicle',
     required: true
   },
   driver_id: {
@@ -25,7 +30,7 @@ const tripSchema = new mongoose.Schema({
   },
   end_odometer_km: {
     type: Number,
-    required: true
+    required: false
   },
   origin: {
     type: {
@@ -40,7 +45,7 @@ const tripSchema = new mongoose.Schema({
     },
     _id: false // Avoid creating a separate document for origin
   },
-  destination: {
+  destination: [{
     type: {
       city: {
         type: String,
@@ -52,7 +57,7 @@ const tripSchema = new mongoose.Schema({
       }
     },
     _id: false // Avoid creating a separate document for destination
-  },
+  }],
   purpose: {
     type: String,
     required: true
@@ -65,4 +70,6 @@ const tripSchema = new mongoose.Schema({
     timestamps: true,
 });
 
-module.exports = mongoose.model('Trip', tripSchema);
+const Trip = mongoose.model('Trip', tripSchema);
+
+export default Trip;
