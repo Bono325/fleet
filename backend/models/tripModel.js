@@ -6,7 +6,7 @@ const tripSchema = new mongoose.Schema({
     required: true,
     ref: "Üser",
   },
-  truck_id: {
+  vehicle_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Vehicle',
     required: true
@@ -16,19 +16,19 @@ const tripSchema = new mongoose.Schema({
     ref: 'Driver',
     required: false // Optional field
   },
-  start_date_time: {
+  startDateTime: {
     type: Date,
     required: true
   },
-  end_date_time: {
+  endDateTime: {
     type: Date,
-    required: true
+    required: false
   },
-  start_odometer_km: {
+  startOdometerKm: {
     type: Number,
     required: true
   },
-  end_odometer_km: {
+  endOdometerKm: {
     type: Number,
     required: false
   },
@@ -45,7 +45,7 @@ const tripSchema = new mongoose.Schema({
     },
     _id: false // Avoid creating a separate document for origin
   },
-  destination: [{
+  destinations: [{
     type: {
       city: {
         type: String,
@@ -60,7 +60,7 @@ const tripSchema = new mongoose.Schema({
   }],
   purpose: {
     type: String,
-    required: true
+    required: false
   },
   notes: {
     type: String,

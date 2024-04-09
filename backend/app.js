@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import userRoutes from "./routes/userRoutes.js";
 import driverRoutes from "./routes/driverRoutes.js";
 import vehicleRoutes from "./routes/vehicleRoutes.js";
+import tripsRoutes from "./routes/tripRoutes.js";
 
 connectDB();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/drivers", driverRoutes);
 app.use("/api/v1/vehicles", vehicleRoutes);
+app.use("/api/v1/trips", tripsRoutes);
 
 app.get("/", (req, res) => {
     res.send("API is runnning!!")
